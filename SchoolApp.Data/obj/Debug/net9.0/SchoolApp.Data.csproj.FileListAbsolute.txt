@@ -1,0 +1,17 @@
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/bin/Debug/net9.0/SchoolApp.Data.deps.json
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/bin/Debug/net9.0/SchoolApp.Data.runtimeconfig.json
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/bin/Debug/net9.0/SchoolApp.Data.dll
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/bin/Debug/net9.0/SchoolApp.Data.pdb
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/bin/Debug/net9.0/SchoolApp.Domain.dll
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/bin/Debug/net9.0/SchoolApp.Domain.pdb
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/obj/Debug/net9.0/SchoolApp.Data.csproj.AssemblyReference.cache
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/obj/Debug/net9.0/SchoolApp.Data.GeneratedMSBuildEditorConfig.editorconfig
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/obj/Debug/net9.0/SchoolApp.Data.AssemblyInfoInputs.cache
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/obj/Debug/net9.0/SchoolApp.Data.AssemblyInfo.cs
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/obj/Debug/net9.0/SchoolApp.Data.csproj.CoreCompileInputs.cache
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/obj/Debug/net9.0/SchoolAp.7706F982.Up2Date
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/obj/Debug/net9.0/SchoolApp.Data.dll
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/obj/Debug/net9.0/refint/SchoolApp.Data.dll
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/obj/Debug/net9.0/SchoolApp.Data.pdb
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/obj/Debug/net9.0/SchoolApp.Data.genruntimeconfig.cache
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/obj/Debug/net9.0/ref/SchoolApp.Data.dll
