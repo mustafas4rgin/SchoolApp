@@ -144,7 +144,7 @@ public class GradeService : GenericService<Grade>, IGradeService
             return new ErrorResultWithData<Grade>(ex.Message);
         }
     }
-    public async Task<IServiceResult> AddGradeAsync(Grade grade)
+    public override async Task<IServiceResult> AddAsync(Grade grade)
     {
         try
         {

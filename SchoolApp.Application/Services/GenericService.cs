@@ -52,7 +52,7 @@ public class GenericService<T> : IGenericService<T> where T :EntityBase
             return new ErrorResultWithData<T>(ex.Message);
         }
     }
-    public async Task<IServiceResult> AddAsync(T entity)
+    public virtual async Task<IServiceResult> AddAsync(T entity)
     {
         try
         {

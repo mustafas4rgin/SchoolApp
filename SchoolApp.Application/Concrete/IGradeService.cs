@@ -10,7 +10,6 @@ public interface IGradeService : IGenericService<Grade>
 {
     Task<IServiceResultWithData<IEnumerable<Grade>>> GetGradesWithIncludesAsync(QueryParameters param);
     Task<IServiceResultWithData<Grade>> GetGradeByIdWithIncludesAsync(QueryParameters param, int id);
-    Task<IServiceResult> AddGradeAsync(Grade grade);
     Task<IServiceResultWithData<IEnumerable<Grade>>> GetStudentsGradesAsync(int studentId, QueryParameters param);
     Task<IServiceResultWithData<IEnumerable<Grade>>> GetGradesByCourseIdAsync(int courseId, QueryParameters param);
 }

@@ -13,7 +13,8 @@ public class ServiceRegistrationProvider
             (typeof(IGenericService<>),typeof(GenericService<>)),
             (typeof(IRoleService),typeof(RoleService)),
             (typeof(IStudentService),typeof(StudentService)),
-            (typeof(IGradeService),typeof(GradeService))
+            (typeof(IGradeService),typeof(GradeService)),
+            (typeof(ICourseService),typeof(CourseService))
         };
         foreach (var service in servicesToRegister)
         {

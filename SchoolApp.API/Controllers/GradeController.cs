@@ -59,24 +59,6 @@ namespace SchoolApp.API.Controllers
 
             return Ok(dto);
         }
-        public override async Task<IActionResult> Add([FromBody]CreateGradeDTO dto)
-        {
-            var validationResult = await _createValidator.ValidateAsync(dto);
-
-            if (!validationResult.IsValid)
-                return HandleValidationErrors(validationResult.Errors);
-
-            var newGrade = _mapper.Map<Grade>(dto);
-
-            var addingResult = await _gradeService.AddGradeAsync(newGrade);
-
-            var errorResult = HandleServiceResult(addingResult);
-
-            if (errorResult != null)
-                return errorResult;
-
-            return Ok(addingResult);
-        }
         [HttpGet("student/{studentId}")]
         public async Task<IActionResult> GetStudentGrades([FromQuery] QueryParameters param, [FromRoute]int studentId)
         {
