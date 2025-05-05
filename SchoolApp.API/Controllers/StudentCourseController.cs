@@ -15,11 +15,47 @@ namespace SchoolApp.API.Controllers
     [ApiController]
     public class StudentCourseController : GenericController<StudentCourse,StudentCourseDTO,CreateStudentCourseDTO,UpdateStudentCourseDTO>
     {
+        private readonly IStudentCourseService _studentCourseService;
+        private readonly IMapper _mapper;
         public StudentCourseController(
-            IGenericService<StudentCourse> service,
+            IStudentCourseService service,
             IValidator<CreateStudentCourseDTO> createValidator,
             IValidator<UpdateStudentCourseDTO> updateValidator,
             IMapper mapper
-        ) : base(service,createValidator,updateValidator,mapper) {}
+        ) : base(service,createValidator,updateValidator,mapper) 
+        {
+            _mapper = mapper;
+            _studentCourseService = service;
+        }
+        public override async Task<IActionResult> GetAll([FromQuery]QueryParameters param)
+        {
+            var result = await _studentCourseService.GetStudentCoursesWithIncludesAsync(param);
+
+            var errorResult = HandleServiceResult(result);
+
+            if (errorResult != null)
+                return errorResult;
+
+            var studentCourses = result.Data;
+
+            var dto = _mapper.Map<List<StudentCourseDTO>>(studentCourses);
+
+            return Ok(dto);
+        }
+        public override async Task<IActionResult> GetById([FromRoute]int id,[FromQuery]QueryParameters param)
+        {
+            var result = await _studentCourseService.GetStudentCourseByIdWithIncludesAsync(id,param);
+
+            var errorResult = HandleServiceResult(result);
+
+            if (errorResult != null)
+                return errorResult;
+
+            var studentCourse = result.Data;
+
+            var dto = _mapper.Map<StudentCourseDTO>(studentCourse);
+
+            return Ok(dto);
+        }
     }
 }

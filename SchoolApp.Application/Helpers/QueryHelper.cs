@@ -5,6 +5,23 @@ namespace SchoolApp.Application.Helpers;
 
 public static class QueryHelper
 {
+    public static IQueryable<StudentCourse> ApplyIncludesForStudentCourses(IQueryable<StudentCourse> query, string include)
+    {
+        if (string.IsNullOrWhiteSpace(include)) return query;
+
+        var includes = include.Split(',',StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (var inc in includes.Select(i => i.Trim().ToLower()))
+        {
+            switch (inc)
+            {
+                case "student" : query = query.Include(sc => sc.Student);break;
+                case "course" : query = query.Include(sc => sc.Course);break;
+                case "all" : query = query.Include(sc => sc.Course).Include(sc => sc.Student);break;
+            }
+        }
+        return query;
+    }
     public static IQueryable<Course> ApplyIncludesForCourse(IQueryable<Course> query, string include)
     {
         if (string.IsNullOrWhiteSpace(include)) return query;
