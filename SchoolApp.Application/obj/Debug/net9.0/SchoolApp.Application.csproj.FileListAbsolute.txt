@@ -24,3 +24,4 @@
 /Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Application/obj/Debug/net9.0/refint/SchoolApp.Application.dll
 /Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Application/obj/Debug/net9.0/SchoolApp.Application.pdb
 /Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Application/obj/Debug/net9.0/ref/SchoolApp.Application.dll
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Application/obj/Debug/net9.0/SchoolApp.Application.sourcelink.json

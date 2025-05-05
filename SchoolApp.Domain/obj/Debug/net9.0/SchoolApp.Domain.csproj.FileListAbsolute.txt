@@ -20,3 +20,4 @@
 /Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Domain/obj/Debug/net9.0/refint/SchoolApp.Domain.dll
 /Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Domain/obj/Debug/net9.0/SchoolApp.Domain.pdb
 /Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Domain/obj/Debug/net9.0/ref/SchoolApp.Domain.dll
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Domain/obj/Debug/net9.0/SchoolApp.Domain.sourcelink.json

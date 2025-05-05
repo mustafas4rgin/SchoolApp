@@ -64,7 +64,7 @@ namespace SchoolApp.API.Controllers
             return Ok(dto);
         }
         [HttpPost("Add")]
-        public async Task<IActionResult> Add(TCreateDto dto)
+        public virtual async Task<IActionResult> Add(TCreateDto dto)
         {
             var validationResult = await _createValidator.ValidateAsync(dto);
 

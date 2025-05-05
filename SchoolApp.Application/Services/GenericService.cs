@@ -71,7 +71,7 @@ public class GenericService<T> : IGenericService<T> where T :EntityBase
             return new ErrorResult(ex.Message);
         }
     }
-    public async Task<IServiceResult> UpdateAsync(T entity)
+    public virtual async Task<IServiceResult> UpdateAsync(T entity)
     {
         try
         {

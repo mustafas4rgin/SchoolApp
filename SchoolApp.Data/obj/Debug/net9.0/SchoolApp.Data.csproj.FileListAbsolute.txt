@@ -15,3 +15,4 @@
 /Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/obj/Debug/net9.0/SchoolApp.Data.pdb
 /Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/obj/Debug/net9.0/SchoolApp.Data.genruntimeconfig.cache
 /Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/obj/Debug/net9.0/ref/SchoolApp.Data.dll
+/Users/s4rgin/Desktop/Projects/SchoolApp/SchoolApp.Data/obj/Debug/net9.0/SchoolApp.Data.sourcelink.json

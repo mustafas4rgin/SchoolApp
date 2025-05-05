@@ -13,7 +13,8 @@ public class GradeProfile : Profile
         CreateMap<CreateGradeDTO, Grade>().ReverseMap();
         CreateMap<UpdateGradeDTO, Grade>().ReverseMap();
         CreateMap<Grade, GradeDTO>()
-            .ForMember(dest => dest.CourseName, opt => opt.MapFrom(src => src.Course.Name));
+            .ForMember(dest => dest.CourseName, opt => opt.MapFrom(src => src.Course.Name))
+            .ForMember(dest => dest.StudentName, opt => opt.MapFrom(src => src.Student.FirstName));
 
         CreateMap<Grade, GradesForStudentDTO>()
             .ForMember(dest => dest.CourseName, opt => opt.MapFrom(src => src.Course.Name));
