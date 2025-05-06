@@ -13,7 +13,9 @@ public static class EntityValidatorAssemblyProvider
             typeof(StudentCourseValidator),
             typeof(StudentValidator),
             typeof(TeacherValidator),
-            typeof(RoleValidator)
+            typeof(RoleValidator),
+            typeof(FacultyValidator),
+            typeof(DepartmentValidator)
         };
     }
 }

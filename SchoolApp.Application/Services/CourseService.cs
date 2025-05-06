@@ -80,6 +80,11 @@ public class CourseService : GenericService<Course>, ICourseService
 
             if (teacher is null || teacher.IsDeleted)
                 return new ErrorResult($"There is no teacher with ID : {course.TeacherId}");
+            
+            var department = await _genericRepository.GetByIdAsync<Department>(course.DepartmentId);
+
+            if (department is null || department.IsDeleted)
+                return new ErrorResult($"There is no department with ID : {course.DepartmentId}");
 
             var existingCourse = await _genericRepository.GetAll<Course>()
                                     .FirstOrDefaultAsync(c => c.Name == course.Name && !c.IsDeleted);
@@ -110,6 +115,11 @@ public class CourseService : GenericService<Course>, ICourseService
 
             if (teacher is null || teacher.IsDeleted)
                 return new ErrorResult($"There is no teacher with ID : {course.TeacherId}");
+
+            var department = await _genericRepository.GetByIdAsync<Department>(course.DepartmentId);
+
+            if (department is null || department.IsDeleted)
+                return new ErrorResult($"There is no department with ID : {course.DepartmentId}");
 
             var existingCourse = await _genericRepository.GetAll<Course>()
                                     .FirstOrDefaultAsync(c => c.Name == course.Name && !c.IsDeleted);

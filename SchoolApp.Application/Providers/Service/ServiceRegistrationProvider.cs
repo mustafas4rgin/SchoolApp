@@ -15,7 +15,8 @@ public class ServiceRegistrationProvider
             (typeof(IStudentService),typeof(StudentService)),
             (typeof(IGradeService),typeof(GradeService)),
             (typeof(ICourseService),typeof(CourseService)),
-            (typeof(IStudentCourseService),typeof(StudentCourseService))
+            (typeof(IStudentCourseService),typeof(StudentCourseService)),
+            (typeof(ITeacherService),typeof(TeacherService))
         };
         foreach (var service in servicesToRegister)
         {

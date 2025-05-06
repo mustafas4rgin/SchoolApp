@@ -26,7 +26,18 @@ public class StudentProfile : Profile
             });
 
         CreateMap<Student, StudentDTO>()
-        .ForMember(dest => dest.RoleName, opt => opt.MapFrom(src => src.Role.Name));
+        .ForMember(dest => dest.RoleName, opt => opt.MapFrom(src => src.Role.Name))
+        .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src. Department.Title))
+        .ForMember(dest => dest.StudentCourses, opt => opt.MapFrom(src =>
+                        src.StudentCourses
+                            .Where(g => !g.IsDeleted)
+                            .Select(g => new CoursesForUserDTO
+                            {
+                                Id = g.Id,
+                                CourseName = g.Course.Name,
+                                Attendance = g.Attendance,
+                                JoinDate = g.JoinDate
+                            })));
          
     }
 }

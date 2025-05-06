@@ -49,5 +49,11 @@ public class StudentValidator : AbstractValidator<Student>
             .WithMessage("Role ID cannot be null.")
             .GreaterThan(0)
             .WithMessage("Role ID must be greater than zero.");
+
+        RuleFor(s => s.DepartmentId)
+            .NotNull()
+            .WithMessage("Department ID cannot be null.")
+            .GreaterThan(0)
+            .WithMessage("Department ID must be greater than zero.");
     }
 }

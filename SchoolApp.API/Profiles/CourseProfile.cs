@@ -12,7 +12,11 @@ public class CourseProfile : Profile
     {
         CreateMap<CreateCourseDTO, Course>().ReverseMap();
 
+        CreateMap<Course, CourseDTOForTeacher>()
+            .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department.Title));
+
         CreateMap<Course, CourseDTO>()
+            .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department.Title))
             .ForMember(dest => dest.TeacherName, opt => opt.MapFrom(src => src.Teacher.FirstName))
             .ForMember(dest => dest.StudentNames, opt => opt.MapFrom(src =>
                         src.StudentCourses

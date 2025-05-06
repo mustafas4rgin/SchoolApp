@@ -33,5 +33,10 @@ public class TeacherConfiguration : IEntityTypeConfiguration<Teacher>
             .WithOne(c => c.Teacher)
             .HasForeignKey(c => c.TeacherId)
             .OnDelete(DeleteBehavior.NoAction);
+
+        builder.HasOne(t => t.Department)
+            .WithMany(d => d.Teachers)
+            .HasForeignKey(t => t.DepartmentId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

@@ -25,6 +25,7 @@ public class TeacherProfile : Profile
                 dest.RoleId = 2;
             });
 
-        CreateMap<TeacherDTO, Teacher>().ReverseMap();
+        CreateMap<Teacher, TeacherDTO>()
+            .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department.Title));
     }
 }

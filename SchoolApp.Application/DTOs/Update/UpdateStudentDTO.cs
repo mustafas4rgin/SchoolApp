@@ -11,5 +11,6 @@ public class UpdateStudentDTO
     public string Number { get; set; } = string.Empty;
     public int Year { get; set; }
     public int RoleId { get; set; }
+    public int DepartmentId { get; set; }
 
 }

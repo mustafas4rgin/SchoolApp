@@ -71,6 +71,9 @@ namespace SchoolApp.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("integer");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
@@ -86,9 +89,70 @@ namespace SchoolApp.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DepartmentId");
+
                     b.HasIndex("TeacherId");
 
                     b.ToTable("Courses", (string)null);
+                });
+
+            modelBuilder.Entity("SchoolApp.Domain.Entities.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("FacultyId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacultyId");
+
+                    b.ToTable("Departments", (string)null);
+                });
+
+            modelBuilder.Entity("SchoolApp.Domain.Entities.Faculty", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Faculties", (string)null);
                 });
 
             modelBuilder.Entity("SchoolApp.Domain.Entities.Grade", b =>
@@ -279,12 +343,17 @@ namespace SchoolApp.Data.Migrations
                 {
                     b.HasBaseType("SchoolApp.Domain.Entities.User");
 
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Number")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Year")
                         .HasColumnType("integer");
+
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Students", (string)null);
                 });
@@ -293,9 +362,14 @@ namespace SchoolApp.Data.Migrations
                 {
                     b.HasBaseType("SchoolApp.Domain.Entities.User");
 
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Number")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Teachers", (string)null);
                 });
@@ -313,13 +387,32 @@ namespace SchoolApp.Data.Migrations
 
             modelBuilder.Entity("SchoolApp.Domain.Entities.Course", b =>
                 {
+                    b.HasOne("SchoolApp.Domain.Entities.Department", "Department")
+                        .WithMany("Courses")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("SchoolApp.Domain.Entities.Teacher", "Teacher")
                         .WithMany("Courses")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("Department");
+
                     b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("SchoolApp.Domain.Entities.Department", b =>
+                {
+                    b.HasOne("SchoolApp.Domain.Entities.Faculty", "Faculty")
+                        .WithMany("Departments")
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Faculty");
                 });
 
             modelBuilder.Entity("SchoolApp.Domain.Entities.Grade", b =>
@@ -384,20 +477,36 @@ namespace SchoolApp.Data.Migrations
 
             modelBuilder.Entity("SchoolApp.Domain.Entities.Student", b =>
                 {
+                    b.HasOne("SchoolApp.Domain.Entities.Department", "Department")
+                        .WithMany("Students")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("SchoolApp.Domain.Entities.User", null)
                         .WithOne()
                         .HasForeignKey("SchoolApp.Domain.Entities.Student", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("SchoolApp.Domain.Entities.Teacher", b =>
                 {
+                    b.HasOne("SchoolApp.Domain.Entities.Department", "Department")
+                        .WithMany("Teachers")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("SchoolApp.Domain.Entities.User", null)
                         .WithOne()
                         .HasForeignKey("SchoolApp.Domain.Entities.Teacher", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("SchoolApp.Domain.Entities.Course", b =>
@@ -405,6 +514,20 @@ namespace SchoolApp.Data.Migrations
                     b.Navigation("Grades");
 
                     b.Navigation("StudentCourses");
+                });
+
+            modelBuilder.Entity("SchoolApp.Domain.Entities.Department", b =>
+                {
+                    b.Navigation("Courses");
+
+                    b.Navigation("Students");
+
+                    b.Navigation("Teachers");
+                });
+
+            modelBuilder.Entity("SchoolApp.Domain.Entities.Faculty", b =>
+                {
+                    b.Navigation("Departments");
                 });
 
             modelBuilder.Entity("SchoolApp.Domain.Entities.Role", b =>

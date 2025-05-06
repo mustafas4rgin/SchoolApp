@@ -11,6 +11,6 @@ public class UpdateTeacherDTO
     public byte[] Salt { get; set; } = null!;
     public string Phone { get; set; } = string.Empty;
     public string Number { get; set; } = string.Empty;
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public int DepartmentId { get; set; }
 
 }

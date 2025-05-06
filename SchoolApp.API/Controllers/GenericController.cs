@@ -32,7 +32,7 @@ namespace SchoolApp.API.Controllers
             _mapper = mapper;
         }
         [HttpGet("GetAll")]
-        public virtual async Task<IActionResult> GetAll([FromQuery]QueryParameters param)
+        public virtual async Task<IActionResult> GetAll([FromQuery] QueryParameters param)
         {
             var result = await _genericService.GetAllAsync();
 
@@ -40,7 +40,7 @@ namespace SchoolApp.API.Controllers
 
             if (errorResponse != null)
                 return errorResponse;
-    
+
             var entities = result.Data;
 
             var dto = _mapper.Map<List<TListDto>>(entities);
@@ -48,7 +48,7 @@ namespace SchoolApp.API.Controllers
             return Ok(dto);
         }
         [HttpGet("GetById/{id}")]
-        public virtual async Task<IActionResult> GetById(int id, QueryParameters param)
+        public virtual async Task<IActionResult> GetById([FromRoute] int id, [FromQuery] QueryParameters param)
         {
             var result = await _genericService.GetByIdAsync(id);
 
@@ -64,18 +64,18 @@ namespace SchoolApp.API.Controllers
             return Ok(dto);
         }
         [HttpPost("Add")]
-        public virtual async Task<IActionResult> Add(TCreateDto dto)
+        public virtual async Task<IActionResult> Add([FromBody]TCreateDto dto)
         {
             var validationResult = await _createValidator.ValidateAsync(dto);
 
             if(!validationResult.IsValid)
                 return HandleValidationErrors(validationResult.Errors);
 
-            var entity = _mapper.Map<T>(dto);
+        var entity = _mapper.Map<T>(dto);
 
-            var addingResult = await _genericService.AddAsync(entity);
+        var addingResult = await _genericService.AddAsync(entity);
 
-            var errorResponse = HandleServiceResult(addingResult);
+        var errorResponse = HandleServiceResult(addingResult);
 
             if (errorResponse != null)
                 return errorResponse;
@@ -83,7 +83,7 @@ namespace SchoolApp.API.Controllers
             return Ok(addingResult);
         }
         [HttpPut("Update/{id}")]
-        public async Task<IActionResult> Update(TUpdateDto dto, int id)
+        public async Task<IActionResult> Update([FromBody]TUpdateDto dto, [FromRoute]int id)
         {
             var existingEntityResult = await _genericService.GetByIdAsync(id);
 
@@ -111,7 +111,7 @@ namespace SchoolApp.API.Controllers
             return Ok(updatingResult);
         }
         [HttpDelete("Delete/{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete([FromRoute]int id)
         {
             var result = await _genericService.DeleteAsync(id);
 
@@ -123,7 +123,7 @@ namespace SchoolApp.API.Controllers
             return Ok(result);
         }
         [HttpPut("Restore/{id}")]
-        public async Task<IActionResult> Restore(int id)
+        public async Task<IActionResult> Restore([FromRoute]int id)
         {
             var result = await _genericService.RestoreAsync(id);
 

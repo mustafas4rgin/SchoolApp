@@ -27,5 +27,11 @@ public class CourseValidator : AbstractValidator<Course>
             .WithMessage("TeacherID value cannot be null.")
             .GreaterThan(0)
             .WithMessage("TeacherID value must be greater than zero.");
+
+        RuleFor(c => c.DepartmentId)
+            .NotNull()
+            .WithMessage("DepartmentID value cannot be null.")
+            .GreaterThan(0)
+            .WithMessage("DepartmentID value must be greater than zero.");
     }
 }

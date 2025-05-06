@@ -13,7 +13,9 @@ public static class UpdateDTOValidatorAssemblyProvider
             typeof(UpdateStudentCourseDTOValidator),
             typeof(UpdateStudentDTOValidator),
             typeof(UpdateTeacherDTOValidator),
-            typeof(UpdateRoleDTOValidator)
+            typeof(UpdateRoleDTOValidator),
+            typeof(UpdateDepartmentDTOValidator),
+            typeof(UpdateFacultyDTOValidator)
         };
     }
 }
