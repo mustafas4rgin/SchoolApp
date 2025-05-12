@@ -6,5 +6,7 @@ public class CourseDTOForTeacher
     public string Name { get; set; } = null!;
     public int Year { get; set; }
     public string DepartmentName { get; set; } = null!;
+    public bool IsAvailable { get; set; }
+    public int Credit { get; set; }
 
 }

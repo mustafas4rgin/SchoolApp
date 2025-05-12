@@ -5,6 +5,15 @@ using SchoolApp.Application.Providers.Validator;
 namespace SchoolApp.Application.Registrations;
 public static class ValidatorServiceRegistration
 {
+    public static IServiceCollection AddAuthDtoValidators(this IServiceCollection services)
+    {
+        var authDTOValidatorAssemblies = AuthDTOValidatorAssemblyProvider.GetValidatorAssemblies();
+
+        foreach (var assemblyType in authDTOValidatorAssemblies)
+            services.AddValidatorsFromAssemblyContaining(assemblyType);
+
+        return services;
+    }
     public static IServiceCollection AddCreateDtoValidators(this IServiceCollection services)
     {
         var createDTOValidatorAssemblies = CreateDTOValidatorAssemblyProvider.GetValidatorAssemblies();

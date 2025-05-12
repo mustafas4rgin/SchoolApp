@@ -13,7 +13,7 @@ public class StudentCourseProfile : Profile
         CreateMap<CreateStudentCourseDTO, StudentCourse>().ReverseMap();
         CreateMap<UpdateStudentCourseDTO, StudentCourse>().ReverseMap();
         CreateMap<StudentCourse, StudentCourseDTO>()
-            .ForMember(dest => dest.StudentName, opt => opt.MapFrom(src => src.Student.FirstName))
+            .ForMember(dest => dest.StudentName, opt => opt.MapFrom(src => src.Student.FirstName + " " + src.Student.LastName))
             .ForMember(dest => dest.CourseName, opt => opt.MapFrom(src => src.Course.Name));
     }
 }

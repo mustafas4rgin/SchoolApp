@@ -6,6 +6,8 @@ public static class ValidatorServiceAssembler
 {
     public static IServiceCollection ValidatorAssembler(this IServiceCollection services)
     {
+        services.AddAuthDtoValidators();
+
         services.AddCreateDtoValidators();
 
         services.AddUpdateDtoValidators();

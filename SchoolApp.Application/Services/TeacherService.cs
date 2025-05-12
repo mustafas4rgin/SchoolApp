@@ -12,19 +12,19 @@ namespace SchoolApp.Application.Services;
 
 public class TeacherService : GenericService<Teacher>, ITeacherService
 {
-    private readonly IGenericRepository _genericRepository;
+    private readonly ITeacherRepository _teacherRepository;
     public TeacherService(
-        IGenericRepository genericRepository,
+        ITeacherRepository teacherRepository,
         IValidator<Teacher> validator
-    ) : base (genericRepository,validator)
+    ) : base (teacherRepository,validator)
     {
-        _genericRepository = genericRepository;
+        _teacherRepository = teacherRepository;
     }
     public async Task<IServiceResultWithData<IEnumerable<Teacher>>> GetTeachersWithIncludesAsync(QueryParameters param)
     {
         try
         {
-            var query = _genericRepository.GetAll<Teacher>();
+            var query = _teacherRepository.GetAll<Teacher>();
 
             if (!string.IsNullOrWhiteSpace(param.Include))
                 query = QueryHelper.ApplyIncludesForTeacher(query, param.Include);
@@ -47,7 +47,7 @@ public class TeacherService : GenericService<Teacher>, ITeacherService
     {
         try
         {
-            var query = _genericRepository.GetAll<Teacher>();
+            var query = _teacherRepository.GetAll<Teacher>();
 
             if (!string.IsNullOrWhiteSpace(param.Include))
                 query = QueryHelper.ApplyIncludesForTeacher(query,param.Include);
@@ -64,6 +64,33 @@ public class TeacherService : GenericService<Teacher>, ITeacherService
         catch (Exception ex)
         {
             return new ErrorResultWithData<Teacher>(ex.Message);
+        }
+    }
+    public async Task<IServiceResultWithData<IEnumerable<Course>>> GetTeachersCourses(int teacherId, QueryParameters param)
+    {
+        try
+        {
+            var teacher = await _teacherRepository.GetByIdAsync<Teacher>(teacherId);
+
+            if (teacher is null || teacher.IsDeleted)
+                return new ErrorResultWithData<IEnumerable<Course>>($"There is no teacher with ID : {teacherId}");
+
+            var query = _teacherRepository.GetTeachersCourses(teacherId);
+
+            if (!string.IsNullOrWhiteSpace(param.Include))
+                query = QueryHelper.ApplyIncludesForCourse(query,param.Include);
+
+            var courses = await query.Where(c => !c.IsDeleted)
+                            .ToListAsync();
+
+            if (!courses.Any())
+                return new ErrorResultWithData<IEnumerable<Course>>("There is no course.");
+
+            return new SuccessResultWithData<IEnumerable<Course>>("Courses found.",courses);
+        }
+        catch (Exception ex)
+        {
+            return new ErrorResultWithData<IEnumerable<Course>>(ex.Message);
         }
     }
 }

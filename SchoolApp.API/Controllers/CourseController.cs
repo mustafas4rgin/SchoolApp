@@ -27,6 +27,22 @@ namespace SchoolApp.API.Controllers
             _courseService = service;
             _mapper = mapper;
         }
+        [HttpGet("AvailableCourses")]
+        public async Task<IActionResult> AvailableCourses([FromQuery]QueryParameters param)
+        {
+            var result = await _courseService.AvailableCoursesAsync(param);
+
+            var errorResult = HandleServiceResult(result);
+
+            if (errorResult != null)
+                return errorResult;
+
+            var courses = result.Data;
+
+            var dto = _mapper.Map<List<CourseDTO>>(courses);
+
+            return Ok(dto);
+        }
         public override async Task<IActionResult> GetAll([FromQuery]QueryParameters param)
         {
             var result = await _courseService.GetCoursesWithIncludesAsync(param);
@@ -56,6 +72,48 @@ namespace SchoolApp.API.Controllers
             var dto = _mapper.Map<CourseDTO>(course);
 
             return Ok(dto);
+        }
+        [HttpPost("OpenCourse/{courseId}")]
+        public async Task<IActionResult> OpenCourse([FromRoute]int courseId)
+        {
+            var existingCourseResult = await _courseService.GetByIdAsync(courseId);
+
+            var existingCourseErrorResult = HandleServiceResult(existingCourseResult);
+
+            if (existingCourseErrorResult != null)
+                return existingCourseErrorResult;
+
+            var existingCourse = existingCourseResult.Data;
+
+            var openingCourseResult = await _courseService.OpenCourseAsync(existingCourse);
+
+            var openingCourseErrorResult = HandleServiceResult(openingCourseResult);
+
+            if (openingCourseErrorResult != null)
+                return openingCourseErrorResult;
+
+            return Ok(openingCourseResult.Message);
+        }
+        [HttpPost("CloseCourse/{courseId}")]
+        public async Task<IActionResult> CloseCourse([FromRoute]int courseId)
+        {
+            var existingCourseResult = await _courseService.GetByIdAsync(courseId);
+
+            var existingCourseErrorResult = HandleServiceResult(existingCourseResult);
+
+            if (existingCourseErrorResult != null)
+                return existingCourseErrorResult;
+
+            var existingCourse = existingCourseResult.Data;
+
+            var closingCourseResult = await _courseService.CloseCourseAsync(existingCourse);
+
+            var closingCourseErrorResult = HandleServiceResult(closingCourseResult);
+
+            if (closingCourseErrorResult != null)
+                return closingCourseErrorResult;
+
+            return Ok(closingCourseResult.Message);
         }
     }
 }

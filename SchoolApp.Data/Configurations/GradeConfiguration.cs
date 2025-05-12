@@ -12,7 +12,7 @@ public class GradeConfiguration : IEntityTypeConfiguration<Grade>
 
         builder.HasKey(g => g.Id);
         builder.Property(g => g.CreatedAt).IsRequired();
-        builder.Property(g => g.Note).IsRequired().HasMaxLength(3);
+        builder.Property(g => g.Midterm).IsRequired().HasMaxLength(3);
 
         builder.HasOne(g => g.Course)
             .WithMany(c => c.Grades)

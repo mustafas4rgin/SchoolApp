@@ -13,6 +13,16 @@ public class CreateCourseDTOValidator : AbstractValidator<CreateCourseDTO>
             .Length(2,70)
             .WithMessage("Course name must be between 2-70 characters.");
 
+        RuleFor(c => c.Credit)
+            .NotNull()
+            .WithMessage("Credit cannot be null.")
+            .GreaterThan(0)
+            .WithMessage("Creadit must be greater than zero.");
+
+        RuleFor(c => c.Quota)
+            .GreaterThan(0)
+            .WithMessage("Quota must be greater than zero.");
+
         RuleFor(c => c.Year)
             .NotEmpty()
             .WithMessage("Course year cannot be empty.")

@@ -12,4 +12,7 @@ public class CourseDTO
     public string DepartmentName { get; set; } = null!;
     public List<GradeDTOForCourse> Grades {get; set; } = null!;
     public List<string> StudentNames { get; set; } = null!;
+    public bool IsAvailable { get; set; }
+    public int Credit { get; set; }
+
 }

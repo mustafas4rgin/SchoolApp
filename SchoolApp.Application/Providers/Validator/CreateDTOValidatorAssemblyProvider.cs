@@ -15,7 +15,13 @@ public class CreateDTOValidatorAssemblyProvider
             typeof(CreateTeacherDTOValidator),
             typeof(CreateRoleDTOValidator),
             typeof(CreateDepartmentDTOValidator),
-            typeof(CreateFacultyDTOValidator)
+            typeof(CreateFacultyDTOValidator),
+            typeof(CreateScholarshipApplicationDTOValidator),
+            typeof(CreateSurveyQuestionDTOValidator),
+            typeof(CreateSurveyAnswerDTOValidator),
+            typeof(CreateSurveyOptionDTOValidator),
+            typeof(CreateTuitionPaymentDTOValidator),
+            typeof(CreateSurveyDTOValidator)
         };
     }
 }

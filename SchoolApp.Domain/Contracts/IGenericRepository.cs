@@ -10,6 +10,9 @@ public interface IGenericRepository
     Task<T?> Add<T>(T entity) where T : EntityBase;
     void Delete<T>(T entity) where T : EntityBase;
     void SoftDelete<T>(T entity) where T : EntityBase;
-    void Restore<T>(T entity) where T :EntityBase;
+    void Restore<T>(T entity) where T : EntityBase;
+    void DeleteEntities<T>(IQueryable<T> query) where T : EntityBase;
+    Task AddEntitiesAsync<T>(IEnumerable<T> query) where T : EntityBase;
+    void UpdateEntities<T>(IEnumerable<T> values) where T : EntityBase;
     Task SaveChangesAsync();
 }

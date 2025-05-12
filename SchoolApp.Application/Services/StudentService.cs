@@ -14,14 +14,14 @@ namespace SchoolApp.Application.Services;
 
 public class StudentService :GenericService<Student>, IStudentService
 {
-    private readonly IGenericRepository _genericRepository;
+    private readonly IStudentRepository _studentRepository;
     private readonly IValidator<Student> _validator;
     public StudentService(
-        IGenericRepository repository,
+        IStudentRepository repository,
         IValidator<Student> validator
     ) : base(repository, validator) 
     {
-        _genericRepository = repository;
+        _studentRepository = repository;
         _validator = validator;
     }
     public override async Task<IServiceResult> UpdateAsync(Student student)
@@ -33,13 +33,13 @@ public class StudentService :GenericService<Student>, IStudentService
             if (!validationResult.IsValid)
                 return new ErrorResult(string.Join(" | ", validationResult.Errors.Select(e => e.ErrorMessage)));
                 
-            var department = await _genericRepository.GetByIdAsync<Department>(student.Id);
+            var department = await _studentRepository.GetByIdAsync<Department>(student.DepartmentId);
 
             if (department is null || department.IsDeleted)
                 return new ErrorResult($"There is no department with ID : {student.DepartmentId}");
 
-            await _genericRepository.UpdateAsync(student);
-            await _genericRepository.SaveChangesAsync();
+            await _studentRepository.UpdateAsync(student);
+            await _studentRepository.SaveChangesAsync();
 
             return new SuccessResult("Student added successfully.");
         }
@@ -57,13 +57,13 @@ public class StudentService :GenericService<Student>, IStudentService
             if (!validationResult.IsValid)
                 return new ErrorResult(string.Join(" | ", validationResult.Errors.Select(e => e.ErrorMessage)));
                 
-            var department = await _genericRepository.GetByIdAsync<Department>(student.DepartmentId);
+            var department = await _studentRepository.GetByIdAsync<Department>(student.DepartmentId);
 
             if (department is null || department.IsDeleted)
                 return new ErrorResult($"There is no department with ID : {student.DepartmentId}");
 
-            await _genericRepository.Add(student);
-            await _genericRepository.SaveChangesAsync();
+            await _studentRepository.Add(student);
+            await _studentRepository.SaveChangesAsync();
 
             return new SuccessResult("Student added successfully.");
         }
@@ -72,11 +72,32 @@ public class StudentService :GenericService<Student>, IStudentService
             return new ErrorResult(ex.Message);
         }
     }
+    public async Task<IServiceResultWithData<Student>> GetMyInfo(int studentId, QueryParameters param)
+    {
+        try
+        {
+            var query = _studentRepository.GetAll<Student>();
+
+            if (!string.IsNullOrWhiteSpace(param.Include))
+                query = QueryHelper.ApplyIncludesForStudent(query,param.Include);
+
+            var student = await query.FirstOrDefaultAsync(u => u.Id == studentId);
+
+            if (student is null || student.IsDeleted)
+                return new ErrorResultWithData<Student>("Invalid token.");
+
+            return new SuccessResultWithData<Student>("My information: ",student);
+        }
+        catch (Exception ex)
+        {
+            return new ErrorResultWithData<Student>(ex.Message);
+        }
+    }
     public async Task<IServiceResultWithData<Student>> GetStudentByIdWithIncludesAsync(int id, QueryParameters param)
     {
         try
         {
-            var query = _genericRepository.GetAll<Student>();
+            var query = _studentRepository.GetAll<Student>();
 
             if (!string.IsNullOrWhiteSpace(param.Include))
                 query = QueryHelper.ApplyIncludesForStudent(query, param.Include);
@@ -99,7 +120,7 @@ public class StudentService :GenericService<Student>, IStudentService
     {
         try
         {
-            var query = _genericRepository.GetAll<Student>();
+            var query = _studentRepository.GetAll<Student>();
 
             if (!string.IsNullOrWhiteSpace(param.Include))
                 query = QueryHelper.ApplyIncludesForStudent(query,param.Include);
@@ -116,5 +137,9 @@ public class StudentService :GenericService<Student>, IStudentService
         {
             return new ErrorResultWithData<IEnumerable<Student>>(ex.Message);
         }
+    }
+    public override Task<IServiceResultWithData<IEnumerable<Student>>> GetAllAsync()
+    {
+        throw new NotSupportedException("Use GetStudentsWithIncludesAsync instead.");
     }
 }

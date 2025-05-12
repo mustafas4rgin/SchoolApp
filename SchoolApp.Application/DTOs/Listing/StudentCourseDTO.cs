@@ -8,4 +8,6 @@ public class StudentCourseDTO
     //navigation properties
     public string StudentName { get; set; } = null!;
     public string CourseName { get; set; } = null!;
+    public bool IsConfirmed { get; set; } = false;
+
 }

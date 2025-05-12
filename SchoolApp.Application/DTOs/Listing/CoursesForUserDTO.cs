@@ -7,4 +7,8 @@ public class CoursesForUserDTO
     public DateTime JoinDate { get; set; }
     //navigation properties
     public string CourseName { get; set; } = null!;
+    public string TeacherName { get; set; } = null!;
+    public bool IsAvailable { get; set; }
+    public int Credit { get; set; }
+
 }

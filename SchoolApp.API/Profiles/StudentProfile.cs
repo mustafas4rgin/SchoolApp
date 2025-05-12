@@ -36,7 +36,8 @@ public class StudentProfile : Profile
                                 Id = g.Id,
                                 CourseName = g.Course.Name,
                                 Attendance = g.Attendance,
-                                JoinDate = g.JoinDate
+                                JoinDate = g.JoinDate,
+                                TeacherName = g.Course.Teacher.FirstName + " " + g.Course.Teacher.LastName
                             })));
          
     }

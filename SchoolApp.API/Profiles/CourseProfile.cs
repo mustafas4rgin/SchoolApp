@@ -29,7 +29,8 @@ public class CourseProfile : Profile
                             .Select(g => new GradeDTOForCourse
                             {
                                 Id = g.Id,
-                                Note = g.Note,
+                                Midterm = g.Midterm,
+                                Final = g.Final,
                                 StudentName = g.Student.FirstName
                             })));
     }

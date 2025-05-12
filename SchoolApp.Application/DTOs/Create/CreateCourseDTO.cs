@@ -6,4 +6,8 @@ public class CreateCourseDTO
     public int Year { get; set; }
     public int TeacherId { get; set; }
     public int DepartmentId { get; set; }
+    public int Quota { get; set; }
+    public int Credit { get; set; }
+
+
 }

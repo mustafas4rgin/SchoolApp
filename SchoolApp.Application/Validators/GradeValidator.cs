@@ -20,7 +20,7 @@ public class GradeValidator : AbstractValidator<Grade>
             .GreaterThan(0)
             .WithMessage("Student ID value must be greater than zero.");
 
-        RuleFor(g => g.Note)
+        RuleFor(g => g.Midterm)
             .NotNull()
             .WithMessage("Note cannot be null.")
             .GreaterThanOrEqualTo(0)

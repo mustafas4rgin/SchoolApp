@@ -8,8 +8,7 @@ namespace SchoolApp.API.Controllers
     [ApiController]
     public abstract class BaseApiController : ControllerBase
     {
-        // Ortak response handler'lar veya yardımcı metotlar buraya eklenebilir
-
+        protected int? CurrentUserId => User.GetUserId();
         protected IActionResult? HandleServiceResult<T>(IServiceResultWithData<T> result) where T : class
         {
             if (!result.Success)

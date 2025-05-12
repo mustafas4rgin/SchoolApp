@@ -7,6 +7,7 @@ public class Student : User
     public int DepartmentId { get; set; }
     //navigation properties
     public ICollection<StudentCourse> StudentCourses {get; set;} = null!;
+    public ICollection<SurveyStudent> AnsweredSurveys { get; set; } = null!;
     public Department Department { get; set; } = null!;
     public ICollection<Grade> Grades { get; set; } = null!;
 }

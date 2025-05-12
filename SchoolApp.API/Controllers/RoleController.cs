@@ -11,7 +11,7 @@ using SchoolApp.Application.DTOs.Listing;
 using SchoolApp.Application.DTOs.Update;
 using SchoolApp.Domain.Entities;
 
-namespace MyApp.Namespace
+namespace SchoolApp.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

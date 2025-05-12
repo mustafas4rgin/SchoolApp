@@ -18,7 +18,7 @@ namespace SchoolApp.API.Controllers
         private readonly IGenericService<T> _genericService;
         private readonly IValidator<TCreateDto> _createValidator;
         private readonly IValidator<TUpdateDto> _updateValidator;
-        private readonly IMapper _mapper;
+        public readonly IMapper _mapper;
         public GenericController(
             IGenericService<T> genericService,
             IValidator<TCreateDto> createValidator,

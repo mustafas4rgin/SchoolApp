@@ -9,16 +9,27 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddBusinessService();
+builder.Services.AddBusinessService(builder.Configuration);
 builder.Services.AddDataServices(builder.Configuration);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000") 
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials(); 
+        });
+});
 
 builder.Services.AddSwaggerGen(c =>
 {
     c.OperationFilter<AuthorizeCheckOperationFilter>();
 
-    c.SwaggerDoc("v1", new() { Title = "InventoryApp API", Version = "v1" });
+    c.SwaggerDoc("v1", new() { Title = "OBS App API", Version = "v1" });
 
     c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
@@ -62,8 +73,14 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.MapControllers();
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseCors("AllowFrontend");
+
+app.MapControllers();
 
 app.UseSwagger();
 app.UseSwaggerUI();

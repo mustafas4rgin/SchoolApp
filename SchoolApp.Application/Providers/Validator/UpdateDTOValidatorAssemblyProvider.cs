@@ -1,3 +1,5 @@
+
+using SchoolApp.Application.DTOValidators;
 using SchoolApp.Application.DTOValidators.Update;
 
 namespace SchoolApp.Application.Providers.Validator;
@@ -15,7 +17,13 @@ public static class UpdateDTOValidatorAssemblyProvider
             typeof(UpdateTeacherDTOValidator),
             typeof(UpdateRoleDTOValidator),
             typeof(UpdateDepartmentDTOValidator),
-            typeof(UpdateFacultyDTOValidator)
+            typeof(UpdateFacultyDTOValidator),
+            typeof(UpdateScholarshipDTOValidator),
+            typeof(UpdateSurveyQuestionDTOValidator),
+            typeof(UpdateSurveyAnswerDTOValidator),
+            typeof(UpdateSurveyOptionDTOValidator),
+            typeof(UpdateTuitionPaymentDTOValidator),
+            typeof(UpdateSurveyDTOValidator)
         };
     }
 }

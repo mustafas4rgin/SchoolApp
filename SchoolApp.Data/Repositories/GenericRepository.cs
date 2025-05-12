@@ -38,7 +38,7 @@ public class GenericRepository : IGenericRepository
     }
     public async Task<T?> UpdateAsync<T>(T entity) where T : EntityBase
     {
-        if (entity.Id != default)
+        if (entity.Id == default)
             return null;
         
         var dbEntity = await _context.Set<T>().FindAsync(entity.Id);
@@ -80,6 +80,27 @@ public class GenericRepository : IGenericRepository
         _context.Update(entity);
 
         return;
+    }
+    public async Task AddEntitiesAsync<T>(IEnumerable<T> values) where T : EntityBase
+    {
+        if (!values.Any())
+            return;
+
+        await _context.AddRangeAsync(values);
+    }
+    public void UpdateEntities<T>(IEnumerable<T> values) where T : EntityBase
+    {
+        if (!values.Any())
+            return;
+        
+         _context.Set<T>().UpdateRange(values);
+    }
+    public void DeleteEntities<T>(IQueryable<T> query) where T : EntityBase
+    {
+        if (!query.Any())
+            return;
+
+        _context.Set<T>().RemoveRange(query);
     }
     public async Task SaveChangesAsync()
     {

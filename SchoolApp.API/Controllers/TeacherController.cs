@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolApp.Application.Concrete;
 using SchoolApp.Application.DTOs;
 using SchoolApp.Application.DTOs.Create;
+using SchoolApp.Application.DTOs.Listin;
 using SchoolApp.Application.DTOs.Listing;
 using SchoolApp.Domain.Entities;
 using SchoolApp.Domain.Results;
@@ -54,6 +55,29 @@ namespace SchoolApp.API.Controllers
             var teacher = result.Data;
 
             var dto = _mapper.Map<TeacherDTO>(teacher);
+
+            return Ok(dto);
+        }
+        [HttpGet("courses")]
+        public async Task<IActionResult> GetTeachersCourses([FromQuery]QueryParameters param)
+        {
+            var teacherId = CurrentUserId;
+
+            if (teacherId is null)
+                return BadRequest(
+                    new {message = "Invalid token."}
+                );
+
+            var result = await _teacherService.GetTeachersCourses(teacherId.Value,param);
+
+            var errorResult = HandleServiceResult(result);
+
+            if (errorResult != null)
+                return errorResult;
+
+            var courses = result.Data;
+
+            var dto = _mapper.Map<List<CourseDTO>>(courses);
 
             return Ok(dto);
         }

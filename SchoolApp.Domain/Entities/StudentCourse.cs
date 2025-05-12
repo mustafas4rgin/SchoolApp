@@ -9,4 +9,5 @@ public class StudentCourse : EntityBase
     //navigation properties
     public Student Student { get; set; } = null!;
     public Course Course { get; set; } = null!;
+    public bool IsConfirmed { get; set; } = false;
 }

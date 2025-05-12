@@ -17,7 +17,15 @@ public static class DataServiceRegistration
         });
 
         services.AddTransient<IGenericRepository,GenericRepository>();
-        
+        services.AddTransient<ITeacherRepository, TeacherRepository>();
+        services.AddTransient<IStudentRepository, StudentRepository>();
+        services.AddTransient<IStudentCourseRepository, StudentCourseRepository>();
+        services.AddTransient<ICourseRepository, CourseRepository>();
+        services.AddTransient<ITuitionRepository, TuitionRepository>();
+        services.AddTransient<ISurveyRepository, SurveyRepository>();
+        services.AddTransient<ISurveyQuestionRepository, SurveyQuestionRepository>();
+        services.AddTransient<ISurveyStudentRepository, SurveyStudentRepository>();
+
         return services;
     }
 }
